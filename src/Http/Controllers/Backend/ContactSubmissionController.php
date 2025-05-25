@@ -5,7 +5,7 @@ namespace AcitJazz\ContactUs\Http\Controllers\Backend;
 use AcitJazz\ContactUs\Http\Requests\ContactSubmissionRequest;
 use Illuminate\Routing\Controller;
 use Facades\AcitJazz\ContactUs\Http\Repositories\ContactSubmissionRepository;
-use AcitJazz\ContactUs\Http\Resources\Backend\ContactSubmissionResource;
+use AcitJazz\ContactUs\Http\Resources\Frontend\ContactUsResource;
 use AcitJazz\ContactUs\Models\ContactSubmission;
 use Illuminate\Support\Facades\Cache;
 use Inertia\Inertia;
@@ -15,24 +15,21 @@ class ContactSubmissionController extends Controller
  
     public function index()
     {
-
         $contact_submissions = ContactSubmissionRepository::paginate(20);
 
-        return Inertia::render('contact_submission/index', [
-            'contact_submissions' => ContactSubmissionResource::collection($contact_submissions),
+        return Inertia::render('contact-submission/index', [
+            'contact_submissions' => ContactUsResource::collection($contact_submissions),
             'type' => type(),
-            // 'contact_submissions' => $contact_submissions,
-            'title' => request('trash') ? 'Trash' : 'ContactSubmission',
-            'locale' => app()->getLocale(),
+            'title' => request('trash') ? 'Trash' : 'Contact Submission',
             'trash' => request('trash') ? true : false,
-            'search_title' => request('search_title'),
+            'request' => request()->all(),
             'breadcumb' => [
                 [
                     'text' => 'Dashboard',
                     'url' => route('dashboard.index'),
                 ],
                 [
-                    'text' => 'ContactSubmission',
+                    'text' => 'Contact Submission',
                     'url' => route('contact-submission.index'),
                 ],
             ],

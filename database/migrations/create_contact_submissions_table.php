@@ -23,4 +23,9 @@ return new class extends Migration
             $table->softDeletes();
         });
     }
+
+    public function down(): void
+    {
+        Schema::dropIfExists('contact_submissions');
+    }
 };

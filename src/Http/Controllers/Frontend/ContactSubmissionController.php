@@ -31,7 +31,7 @@ class ContactSubmissionController extends Controller
         $meta = isset($page->meta) ?  checkMeta($page->meta) : $page['meta'];
         $page =  isset($page->meta) ? PageResource::make($page)->resolve() : $page;
         $contact_submission = new ContactSubmission();
-        return Inertia::render('page/page-contact-us', [
+        return Inertia::render('contact-us/index', [
             'page' => $page,
             'contact_submission' => ContactSubmissionResource::make($contact_submission)->resolve(),
          ])->withViewData([

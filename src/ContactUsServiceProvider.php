@@ -25,4 +25,12 @@ class ContactUsServiceProvider extends PackageServiceProvider
                 ])
             ->hasCommand(ContactUsCommand::class);
     }
+    public function packageBooted()
+    {
+        // Publish JS/Vue resources to the main app
+        $this->publishes([
+            __DIR__ . '/../resources/js/admin/contact-us/' => resource_path('js/admin/contact-us'),
+            __DIR__ . '/../resources/js/frontend/contact-us/' => resource_path('js/frontend/contact-us'),
+        ], 'contact-us-assets');
+    }
 }

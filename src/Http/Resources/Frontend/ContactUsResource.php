@@ -1,11 +1,11 @@
 <?php
 
-namespace AcitJazz\ContactUs\Http\Resources\Backend;
+namespace AcitJazz\ContactUs\Http\Resources\Frontend;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Carbon;
 
-class ContactSubmissionResource extends JsonResource
+class ContactUsResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -23,6 +23,7 @@ class ContactSubmissionResource extends JsonResource
             'phone' => $this->phone,
             'subject' => $this->subject,
             'message' => $this->message,
+            'created_at' => $this->created_at ? Carbon::parse($this->created_at)->format('Y-m-d H:i') : null,
         ];
     }
 }
